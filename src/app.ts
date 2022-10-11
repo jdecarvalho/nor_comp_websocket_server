@@ -57,9 +57,12 @@ wss.on('connection', (ws: WebSocket) => {
 });
 
 const mockValues = () => {
+    // generate a number representable by a single byte
     let rand = Math.floor(Math.random() * 256);
-    let register_a_value = String(rand).padStart(4, '0')
-    let register_b_value = ("00000000" + rand.toString(2)).slice(-8)
+    // padded base-10
+    let register_a_value = String(rand).padStart(4, '0');
+    // padded base-2
+    let register_b_value = String(rand.toString(2)).padStart(8, '0');
 
     // FIXME mock a register-A set event
     broadcast(JSON.stringify({
